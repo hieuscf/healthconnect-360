@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-widgets/DatePicker';
-import 'react-widgets/styles.css';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { SignUpPage } from "./pages/auth/SignUpPage";
+import { SignInPage } from "./pages/auth/SignInPage";
 
 const App = () => {
-  const [date, setDate] = useState(new Date());
-
   return (
-    <div>
-      <h1>Select a Date</h1>
-      <DatePicker value={date} onChange={(value) => setDate(value ?? null)} />
-    </div>
+      <Routes>
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+      </Routes>
   );
 };
 
