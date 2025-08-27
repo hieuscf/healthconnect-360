@@ -1,8 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
+import { Eye, EyeOff } from "lucide-react";
+
+
 import { signInSchema } from "../lib/validate";
 import { signIn } from "../lib/api";
-import { toast } from "react-toastify";
+import { notify } from "../../../shared/lib/Notifications"
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../model/authStore";
 
@@ -15,6 +19,7 @@ interface SignInFormValues {
 export default function SignInForm() {
   const navigate = useNavigate();
   const { login } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
   const formik = useFormik<SignInFormValues>({
     initialValues: {
       email: "",
@@ -29,13 +34,13 @@ export default function SignInForm() {
           password: values.password,
         });
 
-        toast.success("Đăng nhập thành công!");
+        notify.success("sign in success!");
         localStorage.setItem("accessToken", result.token.accessToken);
 
         login(result.token.accessToken);
-        console.log("User data:", result.token); //log test user data
+        console.log("User data:", result.token); 
 
-        // Điều hướng dựa vào vai trò
+        
         const role = result.token.user.role;
         if (role === "admin") {
           navigate("/admin/dashboard");
@@ -44,13 +49,13 @@ export default function SignInForm() {
         } else {
           navigate("/home"); 
         }
-
+  
         // navigate("/dashboard");
       } catch (error: unknown) {
         if (error instanceof Error) {
-          toast.error(error.message);
+          notify.error(error.message);
         } else {
-          toast.error("Đăng nhập thất bại.");
+          notify.error("sign in error.");
         }
       }
     },
@@ -73,6 +78,7 @@ export default function SignInForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
+          tabIndex={1} 
           className="block w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
         {formik.touched.email && formik.errors.email && (
@@ -81,7 +87,7 @@ export default function SignInForm() {
       </div>
 
       {/* Password */}
-      <div>
+      <div className="relative">
         <label
           htmlFor="password"
           className="block text-sm font-medium text-gray-700 mb-1"
@@ -91,12 +97,20 @@ export default function SignInForm() {
         <input
           id="password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          className="block w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+          tabIndex={2}
+          className="block w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 pr-10"
         />
+        <button
+          type="button"
+          className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </button>
         {formik.touched.password && formik.errors.password && (
           <p className="text-sm text-red-500 mt-1">{formik.errors.password}</p>
         )}
@@ -125,6 +139,7 @@ export default function SignInForm() {
       <div>
         <button
           type="submit"
+          tabIndex={3} 
           className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
         >
           Sign in

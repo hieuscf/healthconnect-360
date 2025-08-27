@@ -1,14 +1,16 @@
-import React from "react";
+import React ,{ useState } from "react";
 import { useFormik } from "formik";
+import { Eye, EyeOff } from "lucide-react";
+
 import { signInSchema } from "../lib/validate";
 import { signUp } from "../lib/api";
-import { toast } from "react-toastify";
+import { notify } from "../../../shared/lib/Notifications/Notification";
 import { useNavigate } from "react-router-dom";
 
 
 export default function SignUpForm() {
   const navigate = useNavigate();
-
+  const [showPassword, setShowPassword] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,12 +21,12 @@ export default function SignUpForm() {
       try {
         const res = await signUp(values);
         if (res.success) {
-          toast.success("Tạo tài khoản thành công!");
+          notify.success("Tạo tài khoản thành công!");
           resetForm(); // Clear 
           console.log("Tạo tài khoản thành công!")
           navigate("/signin");
         } else {
-          toast.error("Tạo tài khoản thất bại!");
+          notify.error("Tạo tài khoản thất bại!");
         }
       } catch (err: unknown) {
         console.log(err);
@@ -32,9 +34,9 @@ export default function SignUpForm() {
           const axiosError = err as {
             response?: { data?: { message?: string } };
           };
-          toast.error(axiosError.response?.data?.message || "Đã xảy ra lỗi.");
+          notify.error(axiosError.response?.data?.message || "Đã xảy ra lỗi.");
         } else {
-          toast.error("Lỗi không xác định.");
+          notify.error("Lỗi không xác định.");
         }
       }
     },
@@ -57,6 +59,7 @@ export default function SignUpForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
+          tabIndex={1} 
           className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
         />
         {formik.touched.email && formik.errors.email && (
@@ -65,24 +68,32 @@ export default function SignUpForm() {
       </div>
 
       {/* Password */}
-      <div>
+      <div className="relative">
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 mb-1"
         >
           Password
         </label>
         <input
           id="password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
+          tabIndex={2}
+          className="block w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 pr-10"
         />
+        <button
+          type="button"
+          className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </button>
         {formik.touched.password && formik.errors.password && (
-          <p className="text-sm text-red-600 mt-1">{formik.errors.password}</p>
+          <p className="text-sm text-red-500 mt-1">{formik.errors.password}</p>
         )}
       </div>
 
@@ -90,6 +101,7 @@ export default function SignUpForm() {
       <div>
         <button
           type="submit"
+          tabIndex={1} 
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
         >
           Create account
