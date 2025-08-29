@@ -5,9 +5,7 @@ export default {
     extend: {
       fontFamily: {
         epilogue: ["Epilogue", "sans-serif"],
-      },
-      fontWeight: {
-        bold: "700", // thêm nếu cần
+        outfit: ["Outfit", "sans-serif"],
       },
     },
   },
