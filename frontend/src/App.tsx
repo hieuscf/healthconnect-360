@@ -6,6 +6,7 @@ import { SignInPage } from "./pages/auth/SignInPage";
 import MainAdminLayout from "./app/layout/MainAdminLayout";
 import MainPatientLayout from "./app/layout/MainPatientLayout";
 import Dashboard from "./pages/admin/DashBoard/DashBoard"; // import trang Dashboard
+import Home from "./pages/patient/Home";
 
 const App = () => {
   return (
@@ -16,10 +17,10 @@ const App = () => {
         
         {/* Patient layout + Dashboard */}    
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <MainPatientLayout>
-              <Dashboard />
+              <Home />
             </MainPatientLayout>
           }
         />

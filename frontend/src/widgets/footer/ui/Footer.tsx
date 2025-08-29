@@ -24,7 +24,7 @@ const Footer = () => {
 
           {/* About Us */}
           <div>
-            <h3 className="text-gray-400 font-medium mb-6 uppercase tracking-wider text-sm">About Us</h3>
+            <h3 className="text-gray-400 font-Outfit mb-6 uppercase tracking-wider text-sm">About Us</h3>
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">Our Company</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">News & Updates</a></li>
@@ -35,7 +35,7 @@ const Footer = () => {
 
           {/* Healthcare */}
           <div>
-            <h3 className="text-gray-400 font-medium mb-6 uppercase tracking-wider text-sm">Healthcare</h3>
+            <h3 className="text-gray-400 font-Outfit mb-6 uppercase tracking-wider text-sm">Healthcare</h3>
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">For Children</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">For Students</a></li>
@@ -46,7 +46,7 @@ const Footer = () => {
 
           {/* Book an Appointment */}
           <div>
-            <h3 className="text-gray-400 font-medium mb-6 uppercase tracking-wider text-sm">Book an Appointment</h3>
+            <h3 className="text-gray-400 font-Outfit mb-6 uppercase tracking-wider text-sm">Book an Appointment</h3>
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">Health Screening</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">Childhood Immunisation</a></li>
@@ -58,7 +58,7 @@ const Footer = () => {
 
           {/* Part of the DA Group */}
           <div>
-            <h3 className="text-gray-400 font-medium mb-6 uppercase tracking-wider text-sm">Part of the DA Group</h3>
+            <h3 className="text-gray-400 font-Outfit mb-6 uppercase tracking-wider text-sm">Part of the DA Group</h3>
             <ul className="space-y-4">
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">DA Telehealth App</a></li>
               <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 text-base">DA Clinic</a></li>

@@ -59,7 +59,7 @@ const Navigation = () => {
                             <li key={index}>
                               <a
                                 href="#"
-                                className="text-teal-600 hover:text-teal-800 text-sm font-medium transition-colors duration-200 block"
+                                className="text-teal-600 hover:text-teal-800 text-sm font-Outfit transition-colors duration-200 block"
                               >
                                 {item}
                               </a>
