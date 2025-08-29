@@ -1,0 +1,123 @@
+1. Bảng User
+
+Mục đích: Lưu thông tin tài khoản của tất cả người dùng: bác sĩ, bệnh nhân, quản trị viên.
+Table: User
+- user_id: UUID (PK)  Khóa chính của người dùng
+- userName: VARCHAR   Tên đăng nhập hoặc hiển thị
+- email: VARCHAR      Địa chỉ email người dùng
+- password_hash: VARCHAR   Mật khẩu đã mã hóa
+- phone: VARCHAR       Số điện thoại
+- gender: ENUM('male', 'female', 'other')   Giới tính
+- dob: DATE             Ngày sinh
+- role: ENUM('patient', 'doctor', 'admin')   Phân quyền: 'patient', 'doctor', 'admin'
+- avatar_url: VARCHAR    Ảnh đại diện
+- created_at: TIMESTAMP  Ngày tạo tài khoản
+
+
+🩺 2. Bảng Doctor
+
+Mục đích: Lưu thông tin chuyên môn của bác sĩ.
+- doctor_id: UUID (PK, FK → User.user_id)         Khóa chính, tham chiếu User
+- specialization_id: UUID (FK)                    Tham chiếu chuyên khoa
+- license_number: VARCHAR                         Số giấy phép hành nghề
+- experience_years: INT                           Số năm kinh nghiệm
+- bio: TEXT                                       Giới thiệu bản thân
+- rating: FLOAT                                   Đánh giá trung bình
+
+✅ Liên kết với Specialization và User.
+🧍‍♂️ 3. Bảng Patient
+
+Mục đích: Lưu thông tin cá nhân, bảo hiểm của bệnh nhân.
+patient_id: UUID (PK, FK → User.user_id) Khóa chính, tham chiếu User
+- blood_type: ENUM('A', 'B', 'AB', 'O')    Nhóm máu
+- insurance_number: VARCHAR                Mã bảo hiểm
+- address: TEXT                            Địa chỉ cư trú
+📆 4. Bảng Appointment
+
+Mục đích: Lưu thông tin các buổi khám.
+- appointment_id: UUID (PK)                           Mã lịch hẹn
+- patient_id: UUID (FK → Patient.patient_id)          Người đặt lịch
+- doctor_id: UUID (FK → Doctor.doctor_id)             Bác sĩ khám
+- scheduled_time: TIMESTAMP                           Thời gian hẹn
+- status: ENUM('pending','confirmed','completed','cancelled')  Trạng thái lịch hẹn
+- symptoms: TEXT                                       Triệu chứng bệnh nhân
+- diagnosis_ai: TEXT                                  Kết quả AI chẩn đoán
+- appointment_type: ENUM('in_person','video_call')    Loại khám
+- created_at: TIMESTAMP                               Ngày đặt lịch
+
+📁 5. Bảng MedicalRecord
+
+Mục đích: Hồ sơ bệnh án gắn với mỗi buổi khám.
+- record_id: UUID (PK)                      Mã hồ sơ bệnh án
+- appointment_id: UUID (FK)                Tham chiếu lịch hẹn
+- diagnosis: TEXT                          Chẩn đoán của bác sĩ
+- notes: TEXT                              Ghi chú thêm
+- file_url: VARCHAR                        File scan bệnh án
+- created_at: TIMESTAMP                    Thời điểm tạo hồ sơ
+
+💊 6. Bảng Prescription
+
+Mục đích: Đơn thuốc của bác sĩ cho bệnh nhân.
+- prescription_id: UUID (PK)                  Mã đơn thuốc
+- record_id: UUID (FK → MedicalRecord)        Gắn với hồ sơ bệnh án
+- prescribed_by: UUID (FK → Doctor)           Bác sĩ kê đơn
+- prescribed_to: UUID (FK → Patient)          Bệnh nhân nhận thuốc
+- created_at: TIMESTAMP                       Ngày kê đơn
+
+💊 7. Bảng Prescription_Medicines
+
+Mục đích: Danh sách các thuốc trong 1 đơn thuốc.
+- id: UUID (PK)                          Khóa chính
+- prescription_id: UUID (FK)            Gắn với đơn thuốc
+- medicine_id: UUID (FK)                Gắn với thuốc
+- dosage: VARCHAR                       Liều dùng (VD: 500mg)
+- frequency: VARCHAR                    Tần suất dùng (VD: 2 lần/ngày)
+- duration: VARCHAR                     Thời gian dùng (VD: 5 ngày)
+- note: TEXT                            Ghi chú nếu có
+
+💊 8. Bảng Medicines
+
+Mục đích: Danh sách thuốc dùng chung toàn hệ thống.
+- medicine_id: UUID (PK)              Mã thuốc
+- name: VARCHAR                       Tên thuốc
+- description: TEXT                   Mô tả thuốc
+- unit: VARCHAR                       Đơn vị (viên, ml...)
+- side_effects: TEXT                  Tác dụng phụ
+- created_by: UUID (FK → Admin)      Người thêm thuốc
+- created_at: TIMESTAMP              Ngày thêm
+
+🧠 9. Bảng Specialization
+
+Mục đích: Danh sách các chuyên khoa của bác sĩ.
+Trường	Mô tả
+- specialization_id: UUID (PK)     Khóa chính
+- name: VARCHAR                    Tên chuyên khoa
+- description: TEXT                Mô tả chuyên khoa
+
+👨‍⚕️ 10. Bảng Admin
+
+Mục đích: Người quản trị hệ thống.
+admin_id: UUID (PK, FK → User.user_id)  Khóa chính, tham chiếu User
+- position: VARCHAR                        Vị trí hoặc chức vụ
+- created_at: TIMESTAMP                    Thời điểm tạo tài khoản
+🔍 11. Bảng AuditLog
+
+Mục đích: Ghi lại hành động của Admin.
+- log_id: UUID (PK)                  Mã log
+- admin_id: UUID (FK → Admin)       Người thực hiện
+- action: VARCHAR                    Hành động (create/update/delete)
+- target_table: VARCHAR             Tên bảng bị tác động
+- target_id: UUID                   ID bản ghi bị tác động
+- timestamp: TIMESTAMP              Thời điểm thực hiện
+
+📅 12. Bảng DoctorSchedule
+
+Mục đích: Lịch làm việc cố định của bác sĩ trong tuần.
+schedule_id: UUID (PK)                                 Mã lịch
+- doctor_id: UUID (FK → Doctor.doctor_id)                Bác sĩ
+- weekday: ENUM('Monday','Tuesday',...,'Sunday')         Ngày trong tuần
+- start_time: TIME                                       Giờ bắt đầu
+- end_time: TIME                                         Giờ kết thúc
+- is_available: BOOLEAN                                  Có làm việc không
+- location: VARCHAR                                      Địa điểm (nếu có)
+- created_at: TIMESTAMP                                  Thời điểm tạo lịch

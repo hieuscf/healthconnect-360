@@ -1,0 +1,41 @@
+Đề tài: Nền tảng Kết nối Bác sĩ - Bệnh nhân Toàn diện (HealthConnect 360)
+👉 Mục tiêu:
+
+Xây dựng một nền tảng chăm sóc sức khỏe trực tuyến cho phép người dùng:
+
+    Đăng ký khám bệnh
+
+    Chat/Video call với bác sĩ
+
+    Quản lý bệnh án
+
+    Tư vấn AI hỗ trợ chuẩn đoán ban đầu
+
+    Thanh toán online
+
+    Xem lịch sử khám, đơn thuốc
+
+    Quản lý từ phía admin/bệnh viện
+
+🚀 Tính năng chính (đa lĩnh vực):
+Lĩnh vực	Mô tả
+Web App	Đăng ký, đăng nhập, đặt lịch khám, xem lịch sử, tải hồ sơ bệnh án
+Real-time	Chat thời gian thực với bác sĩ, thông báo trạng thái lịch khám
+Video Call	Gọi video trực tiếp giữa bác sĩ và bệnh nhân (WebRTC)
+AI/ML	Gợi ý chẩn đoán sơ bộ dựa trên triệu chứng bằng GPT hoặc mô hình ML
+Thanh toán	Tích hợp Momo/VNPAY/Stripe để thanh toán phí khám
+Admin Panel	Quản lý bác sĩ, bệnh nhân, thống kê doanh thu, báo cáo theo tháng
+Cloud	Lưu trữ hồ sơ bệnh án + đơn thuốc trên S3 hoặc Firebase
+Security	Phân quyền người dùng, mã hóa dữ liệu nhạy cảm, audit log
+
+Tính năng mở rộng (nếu còn thời gian):
+
+    Gửi mail nhắc lịch khám
+
+    Đánh giá, xếp hạng bác sĩ
+
+    Lọc lịch khám theo chuyên khoa
+
+    Bản mobile: dùng React Native để triển khai song song
+
+    AI phân tích hình ảnh (X-quang, đơn thuốc...) nếu học thêm về Vision

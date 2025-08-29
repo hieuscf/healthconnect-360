@@ -26,6 +26,7 @@ export default function SignUpForm() {
           console.log("Tạo tài khoản thành công!")
           navigate("/signin");
         } else {
+          console.log(res);
           notify.error("Tạo tài khoản thất bại!");
         }
       } catch (err: unknown) {

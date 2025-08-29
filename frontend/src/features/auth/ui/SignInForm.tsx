@@ -28,37 +28,41 @@ export default function SignInForm() {
     },
     validationSchema: signInSchema,
     onSubmit: async (values) => {
-      try {
-        const result = await signIn({
-          email: values.email,
-          password: values.password,
-        });
+    try {
+      const result = await signIn({
+        email: values.email,
+        password: values.password,
+      });
 
-        notify.success("sign in success!");
-        localStorage.setItem("accessToken", result.token.accessToken);
+      // Backend trả về: { accessToken, refreshToken, user }
+      console.log("User data:", result.user);
 
-        login(result.token.accessToken);
-        console.log("User data:", result.token); 
+      notify.success("Sign in success!");
 
-        
-        const role = result.token.user.role;
-        if (role === "admin") {
-          navigate("/admin/dashboard");
-        } else if (role === "doctor") {
-          navigate("/doctor/home");
-        } else {
-          navigate("/home"); 
-        }
-  
-        // navigate("/dashboard");
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          notify.error(error.message);
-        } else {
-          notify.error("sign in error.");
-        }
+      // Lưu accessToken vào localStorage
+      localStorage.setItem("accessToken", result.accessToken);
+
+      // Cập nhật Zustand store
+      login(result.accessToken);
+
+      // Điều hướng theo role
+      const role = result.user.role;
+      if (role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (role === "doctor") {
+        navigate("/doctor/home");
+      } else {
+        navigate("/");
       }
-    },
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        notify.error(error.message);
+      } else {
+        notify.error("Sign in error.");
+      }
+    }
+  },
+
   });
 
   return (

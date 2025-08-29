@@ -1,5 +1,6 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
+import { useAuthStore } from "./features/auth/model/authStore";
 import { NotificationsProvider } from "./shared/lib/Notifications/Notification";
 import { SignUpPage } from "./pages/auth/SignUpPage";
 import { SignInPage } from "./pages/auth/SignInPage";
@@ -9,6 +10,11 @@ import Dashboard from "./pages/admin/DashBoard/DashBoard"; // import trang Dashb
 import Home from "./pages/patient/Home";
 
 const App = () => {
+  const { isAuthenticated, initialize } = useAuthStore();
+
+  useEffect(() => {
+    initialize(); // Load lại token nếu có
+  }, []);
   return (
     <NotificationsProvider>
       <Routes>
