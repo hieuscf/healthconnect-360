@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import sequelize from "./shared/config/database";
+import { syncDatabase } from "./shared/config/syncDatabase";
 import authRoutes from "./modules/auth/auth.routes";
-
+import userRoutes from "./modules/users/user.route"
 dotenv.config();
 
 const app = express();
@@ -20,19 +21,12 @@ app.use(
 
 // ✅ Check DB connection
 (async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("✅ connect database success!");
-
-    await sequelize.sync({ alter: true });
-
-    console.log("✅ Sequelize has been synchronized model with Database");
-  } catch (err) {
-    console.error("❌ Error:", err);
-  }
+  await syncDatabase();
 })();
 
+
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT;
 if (!PORT) {

@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import AuthUser from "./auth.model";
+import UserDetails  from "../users/user.model";
 import { signAccessToken, signRefreshToken } from "../../shared/utils/jwt";
 
 export const signup = async (email: string, password: string, role: "patient" | "doctor" | "admin") => {
@@ -13,6 +14,21 @@ export const signup = async (email: string, password: string, role: "patient" | 
     email,
     password_hash: hash,
     role_name: role || "patient",
+    active:true
+  });
+
+  // 2. Tạo UserDetails rỗng/mặc định gắn với user_id
+  await UserDetails.create({
+    user_id: user.user_id,
+    full_name: "",
+    avatar_image: process.env.AVATAR || "https://res.cloudinary.com/dwtuyzsl5/image/upload/v1757610785/avatar-icon_l51bse.avif",
+    phone: "",
+    citizen_id: "",
+    health_insurance_id: null,
+    country: "",
+    city: "",
+    postal_code: null,
+    tax_id: null,
   });
 
   return {

@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAuthStore } from "./features/auth/model/authStore";
 import { NotificationsProvider } from "./shared/lib/Notifications/Notification";
@@ -8,6 +8,9 @@ import MainAdminLayout from "./app/layout/MainAdminLayout";
 import MainPatientLayout from "./app/layout/MainPatientLayout";
 import Dashboard from "./pages/admin/DashBoard/DashBoard"; // import trang Dashboard
 import Home from "./pages/patient/Home";
+import Scheduler from "./pages/doctor/Scheduler/Scheduler";
+import User from "./pages/admin/User/User";
+import Profile from "./pages/patient/Profile";
 
 const App = () => {
   const { isAuthenticated, initialize } = useAuthStore();
@@ -20,8 +23,8 @@ const App = () => {
       <Routes>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
-        
-        {/* Patient layout + Dashboard */}    
+
+        {/* Patient layout + Dashboard */}
         <Route
           path="/"
           element={
@@ -30,13 +33,38 @@ const App = () => {
             </MainPatientLayout>
           }
         />
-        
+
+        <Route
+          path="/profile"
+          element={
+            <MainPatientLayout>
+              <Profile />
+            </MainPatientLayout>
+          }
+        />
+
         {/* Admin layout + Dashboard */}
         <Route
           path="/admin/dashboard"
           element={
             <MainAdminLayout>
               <Dashboard />
+            </MainAdminLayout>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <MainAdminLayout>
+              <User />
+            </MainAdminLayout>
+          }
+        />
+        <Route
+          path="/admin/scheduler"
+          element={
+            <MainAdminLayout>
+              <Scheduler />
             </MainAdminLayout>
           }
         />

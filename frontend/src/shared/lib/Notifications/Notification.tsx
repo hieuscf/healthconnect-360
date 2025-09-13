@@ -2,7 +2,11 @@ import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import React from "react";
 
 // Provider để wrap app
-export const NotificationsProvider = ({ children }: { children: React.ReactNode }) => (
+export const NotificationsProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <SnackbarProvider
     maxSnack={3}
     anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -13,13 +17,12 @@ export const NotificationsProvider = ({ children }: { children: React.ReactNode 
 );
 
 // Hàm tiện ích gọi snackbar
+// eslint-disable-next-line react-refresh/only-export-components
 export const notify = {
   success: (message: string) =>
     enqueueSnackbar(message, { variant: "success" }),
-  error: (message: string) =>
-    enqueueSnackbar(message, { variant: "error" }),
-  info: (message: string) =>
-    enqueueSnackbar(message, { variant: "info" }),
+  error: (message: string) => enqueueSnackbar(message, { variant: "error" }),
+  info: (message: string) => enqueueSnackbar(message, { variant: "info" }),
   warning: (message: string) =>
     enqueueSnackbar(message, { variant: "warning" }),
 };

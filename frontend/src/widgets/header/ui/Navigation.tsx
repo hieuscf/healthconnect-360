@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../features/auth/model/authStore";
 import { DropdownData } from "../model/DropdownData";
 
 const Navigation = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuthStore();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showYouDropdown, setShowYouDropdown] = useState(false);
@@ -13,10 +14,11 @@ const Navigation = () => {
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
+    navigate("/");
   };
 
   return (
-    <header className= "relative bg-white shadow-sm border-b border-gray-100 font-Outfit ">
+    <header className="relative bg-white shadow-sm border-b border-gray-100 font-Outfit ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left side - Logo */}
@@ -44,33 +46,33 @@ const Navigation = () => {
                 </button>
 
                 {showYouDropdown && (
-                <div 
-                  className="absolute left-0 right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
-                  onMouseLeave={() => setShowYouDropdown(false)}
-                >
-                  <div className="max-w-7xl mx-auto grid grid-cols-4 gap-6 p-8">
-                    {Object.entries(DropdownData).map(([category, items]) => (
-                      <div key={category} className="space-y-4">
-                        <h3 className="font-bold text-lg text-teal-600 border-b border-gray-200 pb-2">
-                          {category}
-                        </h3>
-                        <ul className="space-y-3">
-                          {items.map((item, index) => (
-                            <li key={index}>
-                              <a
-                                href="#"
-                                className="text-teal-600 hover:text-teal-800 text-sm font-Outfit transition-colors duration-200 block"
-                              >
-                                {item}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                  <div
+                    className="absolute left-0 right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
+                    onMouseLeave={() => setShowYouDropdown(false)}
+                  >
+                    <div className="max-w-7xl mx-auto grid grid-cols-4 gap-6 p-8">
+                      {Object.entries(DropdownData).map(([category, items]) => (
+                        <div key={category} className="space-y-4">
+                          <h3 className="font-bold text-lg text-teal-600 border-b border-gray-200 pb-2">
+                            {category}
+                          </h3>
+                          <ul className="space-y-3">
+                            {items.map((item, index) => (
+                              <li key={index}>
+                                <a
+                                  href="#"
+                                  className="text-teal-600 hover:text-teal-800 text-sm font-Outfit transition-colors duration-200 block"
+                                >
+                                  {item}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
               </div>
               <a
                 href="#"
@@ -78,7 +80,6 @@ const Navigation = () => {
               >
                 Store
               </a>
-              
             </nav>
 
             {isAuthenticated ? (
@@ -87,7 +88,7 @@ const Navigation = () => {
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="text-gray-800 text-lg font-semibold focus:outline-none hover:text-blue-600"
                 >
-                  Profile 
+                  Profile
                 </button>
 
                 {showDropdown && (

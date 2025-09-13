@@ -15,7 +15,6 @@ const MainAdminLayout: React.FC<MainAdminLayoutProps> = ({ children }) => (
     <div className="flex flex-col flex-1">
       {/* Topbar nằm ngang trên cùng */}
       <Topbar />
-
       {/* Nội dung chính */}
       <main className="flex-1 p-4">{children}</main>
     </div>
@@ -23,4 +22,3 @@ const MainAdminLayout: React.FC<MainAdminLayoutProps> = ({ children }) => (
 );
 
 export default MainAdminLayout;
-

@@ -1,14 +1,21 @@
 import React from "react";
-import { BarChart3,LayoutGrid,ShoppingCart,Calendar,User,CheckSquare,
+import {
+  BarChart3,
+  LayoutGrid,
+  ShoppingCart,
+  Calendar,
+  User,
+  CheckSquare,
   FileText,
   Table2,
   FileType,
   MessageCircle,
-  Headphones, 
+  Headphones,
   Mail,
   Package,
   Shield,
-  ChevronDown, } from "lucide-react";
+  ChevronDown,
+} from "lucide-react";
 import { MenuSection } from "./MenuSection";
 import { MenuItem } from "./MenuItem";
 import { SubmenuItem } from "./SubmenuItem";
@@ -39,10 +46,10 @@ const AdminSidebar: React.FC = () => {
             hasSubmenu
             menuKey="dashboard"
           >
-            <SubmenuItem label="Người dùng" to="/admin/user/patient" />
-            <SubmenuItem label="Phân tích" to="/admin/analytics" />
-            <SubmenuItem label="Doanh số" to="/admin/user/patient"/>
-            <SubmenuItem label="Báo cáo" to="/admin/user/patient"/>
+            <SubmenuItem label="Người dùng" to="/admin/users" />
+            <SubmenuItem label="Phân tích" to="/admin/user/analytics" />
+            <SubmenuItem label="Doanh số" to="/admin/user/patient" />
+            <SubmenuItem label="Báo cáo" to="/admin/user/patient" />
           </MenuItem>
 
           <MenuItem
@@ -51,23 +58,23 @@ const AdminSidebar: React.FC = () => {
             hasSubmenu
             menuKey="ecommerce"
           >
-            <SubmenuItem label="Sản phẩm" to="/admin/user/patient"/>
-            <SubmenuItem label="Đơn hàng" to="/admin/user/patient"/>
-            <SubmenuItem label="Khách hàng" to="/admin/user/patient"/>
+            <SubmenuItem label="Sản phẩm" to="/admin/user/patient" />
+            <SubmenuItem label="Đơn hàng" to="/admin/user/patient" />
+            <SubmenuItem label="Khách hàng" to="/admin/user/patient" />
           </MenuItem>
 
           <MenuItem icon={Calendar} label="Lịch" menuKey={"calendar"} />
 
-          <MenuItem 
-            icon={User} 
-            label="Quản lý người dùng" 
+          <MenuItem
+            icon={User}
+            label="Quản lý người dùng"
             hasSubmenu
             menuKey="user"
           >
-            <SubmenuItem label="Bệnh nhân"  to="/admin/user/patient"/>
-            <SubmenuItem label="Bác sĩ"  to="/admin/user/doctor"/>
-            <SubmenuItem label="Quản trị phụ"  to="/admin/user/patient"/>
-            <SubmenuItem label="Phân quyền" to="/admin/user/permission"/>
+            <SubmenuItem label="Bệnh nhân" to="/admin/user/patient" />
+            <SubmenuItem label="Bác sĩ" to="/admin/user/doctor" />
+            <SubmenuItem label="Quản trị phụ" to="/admin/user/patient" />
+            <SubmenuItem label="Phân quyền" to="/admin/user/permission" />
           </MenuItem>
         </MenuSection>
 
@@ -80,19 +87,14 @@ const AdminSidebar: React.FC = () => {
             hasSubmenu
             menuKey="support"
           >
-            <SubmenuItem label="Vé đang mở" to="/admin/user/patient"/>
-            <SubmenuItem label="Vé đã đóng" to="/admin/user/patient"/>
+            <SubmenuItem label="Vé đang mở" to="/admin/user/patient" />
+            <SubmenuItem label="Vé đã đóng" to="/admin/user/patient" />
           </MenuItem>
 
-          <MenuItem
-            icon={Mail}
-            label="Email"
-            hasSubmenu
-            menuKey="email"
-          >
-            <SubmenuItem label="Hộp thư đến" to="/admin/user/patient"/>
-            <SubmenuItem label="Đã gửi" to="/admin/user/patient"/>
-            <SubmenuItem label="Nháp" to="/admin/user/patient"/>
+          <MenuItem icon={Mail} label="Email" hasSubmenu menuKey="email">
+            <SubmenuItem label="Hộp thư đến" to="/admin/user/patient" />
+            <SubmenuItem label="Đã gửi" to="/admin/user/patient" />
+            <SubmenuItem label="Nháp" to="/admin/user/patient" />
           </MenuItem>
         </MenuSection>
       </div>

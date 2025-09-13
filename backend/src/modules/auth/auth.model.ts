@@ -6,6 +6,7 @@ interface AuthUserAttributes {
   email: string;
   password_hash: string;
   role_name: "patient" | "admin" | "doctor"; // giới hạn role
+  active: boolean;
   created_at?: Date;
 }
 
@@ -22,6 +23,7 @@ class AuthUser
   public email!: string;
   public password_hash!: string;
   public role_name!: "patient" | "admin" | "doctor";
+  public active!: boolean;
   public readonly created_at!: Date;
 }
 
@@ -48,6 +50,11 @@ AuthUser.init(
       type: DataTypes.ENUM("doctor", "admin" , "patient"), // ENUM cho role
       allowNull: false,
       defaultValue: "patient",
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true, // true = active, false = inactive
     },
     created_at: {
       type: DataTypes.DATE,
