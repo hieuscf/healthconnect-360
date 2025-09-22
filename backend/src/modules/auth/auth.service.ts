@@ -1,9 +1,11 @@
 import bcrypt from "bcrypt";
 import AuthUser from "./auth.model";
 import UserDetails  from "../users/user.model";
+import Role from "../permistion/model/roles";
+import UserRole from "../permistion/model/user_roles";
 import { signAccessToken, signRefreshToken } from "../../shared/utils/jwt";
 
-export const signup = async (email: string, password: string, role: "patient" | "doctor" | "admin") => {
+export const signup = async (email: string, password: string) => {
   const existing = await AuthUser.findOne({ where: { email } });
   if (existing) {
     throw new Error("Email đã tồn tại");
@@ -13,9 +15,16 @@ export const signup = async (email: string, password: string, role: "patient" | 
   const user = await AuthUser.create({
     email,
     password_hash: hash,
-    role_name: role || "patient",
     active:true
   });
+
+  const patientRole = await Role.findOne({ where: { role_name: "Patient" } });
+  if (patientRole) {
+    await UserRole.create({
+      user_id: user.user_id,
+      role_id: patientRole.role_id,
+    });
+  }
 
   // 2. Tạo UserDetails rỗng/mặc định gắn với user_id
   await UserDetails.create({
@@ -34,7 +43,7 @@ export const signup = async (email: string, password: string, role: "patient" | 
   return {
     user_id: user.user_id,
     email: user.email,
-    role: user.role_name,
+    role: "Patient",
   };
 };
 
@@ -49,7 +58,7 @@ export const signin = async (email: string, password: string) => {
     throw new Error("Mật khẩu không đúng");
   }
 
-  const payload = { user_id: user.user_id, email: user.email, role: user.role_name };
+  const payload = { user_id: user.user_id, email: user.email };
   const accessToken = signAccessToken(payload);
   const refreshToken = signRefreshToken(payload);
 

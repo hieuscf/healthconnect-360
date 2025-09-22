@@ -3,9 +3,9 @@ import * as AuthService from "./auth.service";
 
 export const signup = async (req: Request, res: Response) => {
   try {
-    const { email, password, role } = req.body;
-    const user = await AuthService.signup(email, password, role);
-    console.log(email,password,role)
+    const { email, password} = req.body;
+    const user = await AuthService.signup(email, password);
+    console.log(email,password)
     res.status(201).json({success:true , message: "Đăng ký thành công", user });
   } catch (error: any) {
     res.status(400).json({ error: error.message });

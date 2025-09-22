@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { UserFilters } from "../../../features/manager/Users/ui/UserFilters";
-import { UserRow } from "../../../features/manager/Users/ui/UserRow";
+import { UserFilters } from "../../../features/Admin/manager/Users/ui/UserFilters";
+import { UserRow } from "../../../features/Admin/manager/Users/ui/UserRow";
 
 export const UsersTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");

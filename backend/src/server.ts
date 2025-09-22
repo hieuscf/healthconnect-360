@@ -6,6 +6,9 @@ import sequelize from "./shared/config/database";
 import { syncDatabase } from "./shared/config/syncDatabase";
 import authRoutes from "./modules/auth/auth.routes";
 import userRoutes from "./modules/users/user.route"
+import specializationRoutes from "./modules/specialization/specialization.route"
+import permissionRoutes from "./modules/permistion/permission.routes"
+import doctorRoutes from "./modules/doctor/doctor.route"
 dotenv.config();
 
 const app = express();
@@ -27,7 +30,9 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-
+app.use("/api/permission", permissionRoutes);
+app.use("/api/specialization",specializationRoutes);
+app.use("/api/doctors",doctorRoutes)
 const PORT = process.env.PORT;
 if (!PORT) {
   throw new Error("PORT environment variable is not defined");

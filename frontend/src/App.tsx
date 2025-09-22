@@ -11,6 +11,9 @@ import Home from "./pages/patient/Home";
 import Scheduler from "./pages/doctor/Scheduler/Scheduler";
 import User from "./pages/admin/User/User";
 import Profile from "./pages/patient/Profile";
+//import DoctorManagement from "./pages/test";
+import ManagerDoctor from "./pages/admin/ManagerDoctor/ManagerDoctorPage";
+import Permission from "./pages/admin/Permission/Permission";
 
 const App = () => {
   const { isAuthenticated, initialize } = useAuthStore();
@@ -43,6 +46,15 @@ const App = () => {
           }
         />
 
+        {/* <Route
+          path="/test"
+          element={
+            <MainPatientLayout>
+              <DoctorManagement />
+            </MainPatientLayout>
+          }
+        /> */}
+
         {/* Admin layout + Dashboard */}
         <Route
           path="/admin/dashboard"
@@ -61,10 +73,26 @@ const App = () => {
           }
         />
         <Route
+          path="/admin/doctor"
+          element={
+            <MainAdminLayout>
+              <ManagerDoctor />
+            </MainAdminLayout>
+          }
+        />
+        <Route
           path="/admin/scheduler"
           element={
             <MainAdminLayout>
               <Scheduler />
+            </MainAdminLayout>
+          }
+        />
+        <Route
+          path="/admin/permission"
+          element={
+            <MainAdminLayout>
+              <Permission />
             </MainAdminLayout>
           }
         />

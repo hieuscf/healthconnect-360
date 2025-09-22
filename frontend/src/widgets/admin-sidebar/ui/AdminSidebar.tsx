@@ -43,15 +43,19 @@ const AdminSidebar: React.FC = () => {
           <MenuItem
             icon={LayoutGrid}
             label="DashBoard"
+            menuKey={"dashboard"}
+            to="/admin/dashboard"
+          />
+          <MenuItem
+            icon={User}
+            label="Quản lý người dùng"
             hasSubmenu
-            menuKey="dashboard"
+            menuKey="user"
           >
-            <SubmenuItem label="Người dùng" to="/admin/users" />
-            <SubmenuItem label="Phân tích" to="/admin/user/analytics" />
-            <SubmenuItem label="Doanh số" to="/admin/user/patient" />
-            <SubmenuItem label="Báo cáo" to="/admin/user/patient" />
+            <SubmenuItem label="Bệnh nhân" to="/admin/patient" />
+            <SubmenuItem label="Bác sĩ" to="/admin/doctor" />
+            <SubmenuItem label="Phân quyền" to="/admin/permission" />
           </MenuItem>
-
           <MenuItem
             icon={ShoppingCart}
             label="Thương mại điện tử"
@@ -64,18 +68,6 @@ const AdminSidebar: React.FC = () => {
           </MenuItem>
 
           <MenuItem icon={Calendar} label="Lịch" menuKey={"calendar"} />
-
-          <MenuItem
-            icon={User}
-            label="Quản lý người dùng"
-            hasSubmenu
-            menuKey="user"
-          >
-            <SubmenuItem label="Bệnh nhân" to="/admin/user/patient" />
-            <SubmenuItem label="Bác sĩ" to="/admin/user/doctor" />
-            <SubmenuItem label="Quản trị phụ" to="/admin/user/patient" />
-            <SubmenuItem label="Phân quyền" to="/admin/user/permission" />
-          </MenuItem>
         </MenuSection>
 
         <MenuSection title="HỖ TRỢ">

@@ -2,18 +2,19 @@
 import { Request, Response } from "express";
 import User from "../auth/auth.model";
 import UserDetails from "./user.model";
+import Role from "../permistion/model/roles";
 
 export const getUserOverview = async () => {
   const totalUsers = await User.count();
-  const totalPatient = await User.count({ where: { role_name: "patient" } });
-  const totalDoctor = await User.count({ where: { role_name: "doctor" } });
-  const totalAdmin = await User.count({ where: { role_name: "admin" } });
+  const totalPatient = await Role.count({ where: { role_name: "patient" } });
+  const totalDoctor = await Role.count({ where: { role_name: "doctor" } });
+  const totalAdmin = await Role.count({ where: { role_name: "admin" } });
 
   const activeUsers = await User.count({ where: { active: true } });
-  const activePatient = await User.count({
+  const activePatient = await Role.count({
     where: { role_name: "patient", active: true },
   });
-  const activeDoctor = await User.count({
+  const activeDoctor = await Role.count({
     where: { role_name: "doctor", active: true },
   });
 

@@ -1,8 +1,8 @@
 import React from "react";
-import ProfileHeader from "../../features/profile/ui/ProfileHeader";
+import ProfileHeader from "../../features/Users/profile/ui/ProfileHeader";
 import { Edit, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import PersionalInfomation from "../../features/profile/ui/PersionalInfomation";
-import ProfileAddress from "../../features/profile/ui/ProfileAddress";
+import PersionalInfomation from "../../features/Users/profile/ui/PersionalInfomation";
+import ProfileAddress from "../../features/Users/profile/ui/ProfileAddress";
 
 const Profile = () => {
   return (
