@@ -3,6 +3,7 @@ import MainPatientLayout from "../../layout/MainPatientLayout";
 import Home from "../../../pages/patient/Home";
 import Profile from "../../../pages/patient/Profile";
 import { Route } from "react-router-dom";
+import PatientRecordPage from "../../../pages/patient/PatientRecordPage";
 
 export const patientRoutes = [
   <Route
@@ -20,6 +21,15 @@ export const patientRoutes = [
     element={
       <MainPatientLayout>
         <Profile />
+      </MainPatientLayout>
+    }
+  />,
+  <Route
+    key="/patient"
+    path="/patient"
+    element={
+      <MainPatientLayout>
+        <PatientRecordPage />
       </MainPatientLayout>
     }
   />,

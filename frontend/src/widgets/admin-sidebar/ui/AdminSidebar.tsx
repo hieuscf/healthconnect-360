@@ -67,7 +67,12 @@ const AdminSidebar: React.FC = () => {
             <SubmenuItem label="Khách hàng" to="/admin/user/patient" />
           </MenuItem>
 
-          <MenuItem icon={Calendar} label="Lịch" menuKey={"calendar"} />
+          <MenuItem
+            icon={Calendar}
+            label="Lịch"
+            menuKey={"calendar"}
+            to="/admin/scheduler"
+          />
         </MenuSection>
 
         <MenuSection title="HỖ TRỢ">

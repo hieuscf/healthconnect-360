@@ -9,6 +9,8 @@ import userRoutes from "./modules/users/user.route"
 import specializationRoutes from "./modules/specialization/specialization.route"
 import permissionRoutes from "./modules/permistion/permission.routes"
 import doctorRoutes from "./modules/doctor/doctor.route"
+import scheduleRoutes from "./modules/scheduler/scheduler.route"
+import patientRoutes from "./modules/patient/patient.route";
 dotenv.config();
 
 const app = express();
@@ -32,7 +34,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/permission", permissionRoutes);
 app.use("/api/specialization",specializationRoutes);
-app.use("/api/doctors",doctorRoutes)
+app.use("/api/doctors",doctorRoutes);
+app.use("/api/scheduler",scheduleRoutes);
+app.use("/api/patients",patientRoutes);
+
 const PORT = process.env.PORT;
 if (!PORT) {
   throw new Error("PORT environment variable is not defined");
